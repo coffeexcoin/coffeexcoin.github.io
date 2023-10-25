@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script src="https://www.lactame.com/lib/image-js/0.21.2/image.min.js"></script>
+  </head>
+
+  <body>
+    <label>Enter Ape ID:</label><input id="apeIdTxt" value="0" type="number" min="0" max="9999" />
+    <button id="processBtn">Process</button>
+    <img id="result" />
+
+    <script>
+      
+      
+      async function process() {
+        const apeId = document.getElementById('apeIdTxt').value;
+        const imageUri = `https://bafybeia2c4eilxaoq53fzjkhkz6trfgvhkc3xqu4dk3kinj4mgs3nxs4cm.ipfs.dweb.link/${apeId}.png`;
+
+        let image = await IJS.Image.load(imageUri);
+
+        const [rR, rG, rB, rA] = image.getPixelXY(30, 30);
+
+        const width = image.width;
+        const height = image.height;
+
+        for (let x = 0; x < width; x++) {
+          for (let y = 0; y < height; y++) {
+            const pixel = image.getPixelXY(x, y);
+            const [r, g, b, a] = pixel;
+            if (r === rR && g === rG && b === rB) {
+                image.setPixelXY(x, y, [r, g, b, 0]);
+            }
+          }
+        }
+
+        document.getElementById('result').src = image.toDataURL();
+      }
+
+      process()
+      document.getElementById('apeIdTxt').addEventListener('change', process);
+    </script>
+  </body>
+</html>
