@@ -4,15 +4,17 @@
   </head>
 
   <body>
-    <label>Enter Ape ID:</label><input id="apeIdTxt" value="0" type="number" min="0" max="9999" />
-    <button id="processBtn">Process</button>
-    <img id="result" />
-
+    <div>
+      <label>Enter Ape ID:</label
+      ><input id="apeIdTxt" value="0" type="number" min="0" max="9999" />
+      <button id="processBtn">Process</button>
+    </div>
+    <div>
+      <img id="result" />
+    </div>
     <script>
-      
-      
       async function process() {
-        const apeId = document.getElementById('apeIdTxt').value;
+        const apeId = document.getElementById("apeIdTxt").value;
         const imageUri = `https://bafybeia2c4eilxaoq53fzjkhkz6trfgvhkc3xqu4dk3kinj4mgs3nxs4cm.ipfs.dweb.link/${apeId}.png`;
 
         let image = await IJS.Image.load(imageUri);
@@ -27,16 +29,16 @@
             const pixel = image.getPixelXY(x, y);
             const [r, g, b, a] = pixel;
             if (r === rR && g === rG && b === rB) {
-                image.setPixelXY(x, y, [r, g, b, 0]);
+              image.setPixelXY(x, y, [r, g, b, 0]);
             }
           }
         }
 
-        document.getElementById('result').src = image.toDataURL();
+        document.getElementById("result").src = image.toDataURL();
       }
 
-      process()
-      document.getElementById('apeIdTxt').addEventListener('change', process);
+      process();
+      document.getElementById("apeIdTxt").addEventListener("change", process);
     </script>
   </body>
 </html>
