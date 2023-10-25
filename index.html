@@ -28,8 +28,8 @@
         const apeParam = Number.parseInt(aParam);
         if (!Number.isNaN(apeParam) && apeParam >= 0 && apeParam <= 9999) {
           document.getElementById("apeIdTxt").value = apeParam;
-          process();
         }
+        process();
       }
 
       async function process() {
@@ -56,7 +56,7 @@
         document.getElementById("result").src = image.toDataURL();
       }
 
-      process();
+      onLoad();
       document.getElementById("apeIdTxt").addEventListener("change", process);
     </script>
   </body>
