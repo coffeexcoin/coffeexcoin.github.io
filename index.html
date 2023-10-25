@@ -17,12 +17,21 @@
     <div>
       <label>Enter Ape ID:</label>
       <input id="apeIdTxt" value="0" type="number" min="0" max="9999" />
-      <button id="processBtn">Process</button>
     </div>
     <div>
       <img id="result" width="400" />
     </div>
     <script>
+      function onLoad() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const aParam = urlParams.get('a');
+        const apeParam = Number.parseInt(aParam);
+        if (!Number.isNaN(apeParam) && apeParam >= 0 && apeParam <= 9999) {
+          document.getElementById("apeIdTxt").value = apeParam;
+          process();
+        }
+      }
+
       async function process() {
         const apeId = document.getElementById("apeIdTxt").value;
         const imageUri = `https://bafybeia2c4eilxaoq53fzjkhkz6trfgvhkc3xqu4dk3kinj4mgs3nxs4cm.ipfs.dweb.link/${apeId}.png`;
